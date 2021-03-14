@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <title>Service Worker Demo</title>
+  </head>
+  <body>
+    <div class="d-flex">
+      <header
+        id="online-indicator"
+        class="p-2 h-auto text-white d-flex align-content-center justify-content-center w-50"
+      ></header>
+      <header
+        id="worker-indicator"
+        class="p-2 h-auto text-white d-flex align-content-center justify-content-center w-50"
+      ></header>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-lg-8 col-md-10 col-sm-12">
+          <header>
+            <h1>Service worker demo</h1>
+          </header>
+          <main id="todo-table"></main>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+    <footer class="bg-primary fixed-bottom p-2">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"
+          >JSON Placeholder URL</span
+        >
+        <input
+          id="url-input"
+          class="form-control"
+          placeholder="Enter a custom URL here"
+          value="https://jsonplaceholder.typicode.com/posts"
+        />
+      </div>
+
+      <div class="d-flex align-content-center justify-content-center">
+        <button onclick="renderTodoList()" class="btn btn-outline-light m-1">
+          Fetch test data
+        </button>
+        <button onclick="registerWorker()" class="btn btn-outline-light m-1">
+          Register Worker
+        </button>
+        <button onclick="unregisterWorker()" class="btn btn-outline-light m-1">
+          Unregister
+        </button>
+      </div>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>
