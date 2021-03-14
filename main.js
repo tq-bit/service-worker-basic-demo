@@ -1,14 +1,12 @@
-window.addEventListener('load', () => {
-  checkOnline();
-  setInterval(() => checkOnline(), 2000);
-});
-
-// TODO: Add the sw-toggle event listener here
-
 // TODO: Add the registerWorker function here
 
 // TODO: Add the unregisterWorker function here
 
+/**
+ * Take the url from the index.html file and
+ * make a fetch request. Only tested with
+ * the URLs covered in the article
+ */
 const fetchData = async () => {
   const url = dqs('#url-input').value;
   const response = await fetch(url);
@@ -16,6 +14,10 @@ const fetchData = async () => {
   return data;
 };
 
+/**
+ * Build up the list based on the data that
+ * were received by the json-placeholder API
+ */
 const renderTodoList = async () => {
   const root = document.querySelector('#todo-table');
   while (root.firstChild) {
@@ -65,6 +67,10 @@ const checkOnline = () => {
 
 // TODO: Add checkWorkerActive function here
 
-window.addEventListener('load', async () => {
-  renderTodoList();
+// When the DOM is done loading, call these functions:
+window.addEventListener('load', () => {
+  checkOnline();
+  setInterval(() => checkOnline(), 2000);
 });
+
+// TODO: Add the sw-toggle - event listener here
