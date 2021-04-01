@@ -1,6 +1,31 @@
 // TODO: Add the registerWorker function here
+const registerWorker = async () => {
+  try {
+    const worker = navigator.serviceWorker;
+    const options = { scope: './' };
+    const swRegisteration = await worker.register('serviceworker.js', options);
+    window.dispatchEvent(new Event('sw-toggle'));
+    return swRegisteration;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 // TODO: Add the unregisterWorker function here
+const unregisterWorker = async () => {
+  try {
+    const worker = navigator.serviceWorker;
+    const swRegisteration = await worker.getRegistration();
+    if (swRegisteration) {
+      swRegisteration.unregister();
+      window.dispatchEvent(new Event('sw-toggle'));
+    } else {
+      console.info('No active workers found');
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 /**
  * Take the url from the index.html file and
@@ -33,7 +58,7 @@ const renderTodoList = async () => {
     }
   });
   root.append(list);
-}
+};
 
 /**
  * Util functions
@@ -46,7 +71,7 @@ const dce = (tag, classes) => {
   const el = document.createElement(tag);
   el.classList.add(...classes);
   return el;
-}
+};
 
 const dqs = (selector) => {
   return document.querySelector(selector);
@@ -66,6 +91,18 @@ const checkOnline = () => {
 };
 
 // TODO: Add checkWorkerActive function here
+const checkWorkerActive = async () => {
+  const swRegisteration = await navigator.serviceWorker.getRegistration();
+  const indicator = dqs('#worker-indicator');
+  indicator.classList.remove('bg-danger', 'bg-success');
+  if (swRegisteration && swRegisteration !== undefined) {
+    indicator.innerText = 'You have an active service worker';
+    indicator.classList.add('bg-success');
+  } else {
+    indicator.innerText = 'Service worker is not active';
+    indicator.classList.add('bg-danger');
+  }
+};
 
 // When the DOM is done loading, call these functions:
 window.addEventListener('load', () => {
@@ -74,3 +111,6 @@ window.addEventListener('load', () => {
 });
 
 // TODO: Add the sw-toggle - event listener here
+window.addEventListener('sw-toggle', () => {
+  checkWorkerActive();
+});
