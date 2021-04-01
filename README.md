@@ -1,6 +1,8 @@
-# Service worker basic feature demo
+# Service worker basic feature demo (finished)
 
 This repository is a boilerplate for my blog entry An introduction to Javascript Serviceworkers.
+
+> Note that this is the branch with the finished code
 
 You can set it up on your local mashine like this:
 
